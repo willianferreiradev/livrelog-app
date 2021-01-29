@@ -1,0 +1,38 @@
+::ng-deep {
+  .item-interactive.ion-valid {
+    --highlight-background: white !important;
+  }
+  .item-interactive.item-has-focus {
+    --highlight-background: #3880ff !important;
+  }
+}
+
+ion-content {
+  --ion-background-color: #12214a;
+
+  .full-height {
+    height: 100%;
+
+    &.center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .center-column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100vw;
+
+        form {
+          width: 90%;
+
+          ion-item {
+            --border-color: white;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}
