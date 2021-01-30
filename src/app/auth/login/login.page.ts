@@ -12,8 +12,8 @@ import { AuthService } from '../auth.service';
 })
 export class LoginPage extends BaseForm implements OnInit {
   fields = [
-    { label: 'E-mail', name: 'email', color: ColorEnum.LIGHT },
-    { label: 'Password', name: 'password', color: ColorEnum.LIGHT },
+    { label: 'E-mail', name: 'email', color: ColorEnum.LIGHT, type: 'text' },
+    { label: 'Password', name: 'password', color: ColorEnum.LIGHT, type: 'password' },
   ];
 
   constructor(

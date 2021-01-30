@@ -8,7 +8,7 @@
         <ng-container *ngFor="let field of fields; let i = index">
           <ion-item lines="full">
             <ion-label position="floating" [color]="field.color">{{ field.label }}</ion-label>
-            <ion-input type="text" [formControlName]="field.name" (ionBlur)="setLabelColor(i)"></ion-input>
+            <ion-input [type]="field.type" [formControlName]="field.name" (ionBlur)="setLabelColor(i)"></ion-input>
           </ion-item>
           <ion-control-error [control]="form.get(field.name)" [label]="field.label"></ion-control-error>
         </ng-container>

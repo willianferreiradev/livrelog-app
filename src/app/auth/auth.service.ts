@@ -11,20 +11,22 @@ import { Storage } from '@ionic/storage';
   providedIn: 'root'
 })
 export class AuthService {
-  private currentUser: BehaviorSubject<User> = new BehaviorSubject(null);
   private readonly API = `${environment.api}auth/`;
+  currentUserSubject: BehaviorSubject<User> = new BehaviorSubject(null);
 
   constructor(
     private http: HttpClient,
     private storage: Storage
-  ) { }
+  ) { 
+    this.storage.get('currentUser').then(user => this.currentUserSubject.next(JSON.parse(user)));
+  }
 
   login(loginData: LoginData): Observable<User> {
     return this.http.post<User>(`${this.API}login`, loginData)
       .pipe(
         switchMap(user => from(this.storage.set('currentUser', JSON.stringify(user)))),
         map(user => {
-          this.currentUser.next(user);
+          this.currentUserSubject.next(user);
           return user;
         })
       );

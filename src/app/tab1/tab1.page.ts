@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-tab1',
@@ -7,6 +8,10 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor() {}
+  constructor(private storage: Storage) {}
 
+  click() {
+    console.log('clicando')
+    this.storage.clear().then();
+  }
 }
