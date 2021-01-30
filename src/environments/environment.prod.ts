@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api: 'https://jsonplaceholder.typicode.com/comments'
+  api: 'https://api.livrelog.com.br/api/v2/'
 };
