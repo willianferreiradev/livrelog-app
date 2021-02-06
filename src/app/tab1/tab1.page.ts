@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
+import { CreateBudgetComponent } from './create-budget/create-budget.component';
 
 @Component({
   selector: 'app-tab1',
@@ -8,10 +10,14 @@ import { Storage } from '@ionic/storage';
 })
 export class Tab1Page {
 
-  constructor(private storage: Storage) {}
+  constructor(
+    private modalController: ModalController
+  ) {}
 
-  click() {
-    console.log('clicando')
-    this.storage.clear().then();
+  async click() {
+    const modal = await this.modalController.create({
+      component: CreateBudgetComponent,
+    });
+    return await modal.present();
   }
 }

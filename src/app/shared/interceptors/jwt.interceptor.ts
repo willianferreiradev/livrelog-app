@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
-import { from, Observable, of } from 'rxjs';
+import { from, Observable, of, throwError } from 'rxjs';
 
 // import { AuthenticationService } from '@services/authentication.service';
 // import { LoaderService } from '@services/loader.service';
-import { catchError, finalize, switchMap, tap } from 'rxjs/operators';
+import { catchError, finalize, map, switchMap, tap } from 'rxjs/operators';
 import { AlertController, LoadingController } from '@ionic/angular';
 // import { showToastError } from '@shared/helpers/toastr';
 
@@ -17,59 +17,42 @@ export class JwtInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const loadingConfig = { message: 'Carregando...' };
+    const { method } = request;
+
     return from(this.loadingController.create(loadingConfig)).pipe(
       tap(loading => loading.present()),
       switchMap(loading => {
         return next.handle(request).pipe(
+          switchMap(response => {
+            if ((response as any)?.body?.erro) {
+              return throwError({ error: { message: 'CEP não encontrado' } });
+            }
+            return of(response);
+          }),
           catchError(({ error: { message = 'Ocorreu algum erro inesperado!', errors = null } }) => {
-
             if (errors) {
-              message = Object.keys(errors).map(key => {
-                return errors[key];
-              }).join('<br> ');
+              message = this.getMessageForMultipleErrors(errors);
             }
 
-            this.alertController.create({
-              message,
-              buttons: ['OK']
-            }).then(alert => alert.present());
+            this.showAlert(message);
             return of(null);
           }),
           finalize(() => loading.dismiss())
         );
       })
     );
+  }
 
+  private getMessageForMultipleErrors(errors: unknown) {
+    return Object.keys(errors).map(key => {
+      return errors[key];
+    }).join('<br> ');
+  }
 
-    this.loadingController.create({
-      message: 'Carregando...'
-    }).then(loading => loading.present());
-    // this.loadeService.show();
-    // const currentUser: any = this.authenticationService.currentUserValue;
-    // if (currentUser && currentUser.access_token && !request.url.includes('viacep')) {
-    //   request = request.clone({
-    //     setHeaders: {
-    //       Authorization: `Bearer ${currentUser?.access_token}`
-    //     }
-    //   });
-    // }
-
-    return next.handle(request).pipe(
-    //   catchError(() => {
-        // if (message === 'User not actived') {
-        //   showToastError('Seu usuário não foi ativado.', 'Ops...');
-        //   return of(null);
-        // }
-
-        // if (message === 'Unauthorized') {
-        //   showToastError('Email ou senha incorretos.', 'Ops...');
-        //   return of(null);
-        // }
-
-        // showToastError('Ocorreu um erro na requisição', 'Ops...');
-      //   return of(null);
-      // }),
-      finalize(() => this.loadingController.dismiss())
-    );
+  private showAlert(message: string) {
+    this.alertController.create({
+      message,
+      buttons: ['OK']
+    }).then(alert => alert.present());
   }
 }

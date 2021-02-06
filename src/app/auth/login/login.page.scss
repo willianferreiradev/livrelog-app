@@ -27,6 +27,10 @@ ion-content {
         form {
           width: 90%;
 
+          label {
+            color: white;
+          }
+
           ion-item {
             --border-color: white;
             color: white;

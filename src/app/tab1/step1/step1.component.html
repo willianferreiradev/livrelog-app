@@ -1,0 +1,33 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Data desejada para mudança</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <form [formGroup]="form">
+      <div class="form-group">
+        <label [class.text-danger]="hasError('date')">Data</label>
+        <ion-datetime
+          class="form-control"
+          [class.is-invalid]="hasError('date')"
+          displayFormat="DD/MM/YYYY"
+          formControlName="date"
+        >
+        </ion-datetime>
+        <ion-control-error
+          [control]="form.get('date')"
+          label="Data"
+          [submited]="submited"
+        ></ion-control-error>
+      </div>
+
+      <ion-fab-button
+        type="button"
+        color="primary"
+        style="justify-content: flex-end"
+        (click)="onSubmit()"
+      >
+        <ion-icon name="chevron-forward"></ion-icon>
+      </ion-fab-button>
+    </form>
+  </ion-card-content>
+</ion-card>

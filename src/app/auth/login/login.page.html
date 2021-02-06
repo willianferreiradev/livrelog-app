@@ -4,13 +4,21 @@
       <ion-img src="assets/images/logo-light.png"></ion-img>
 
       <form [formGroup]="form" (submit)="onSubmit()">
-
         <ng-container *ngFor="let field of fields; let i = index">
-          <ion-item lines="full">
-            <ion-label position="floating" [color]="field.color">{{ field.label }}</ion-label>
-            <ion-input [type]="field.type" [formControlName]="field.name" (ionBlur)="setLabelColor(i)"></ion-input>
-          </ion-item>
-          <ion-control-error [control]="form.get(field.name)" [label]="field.label"></ion-control-error>
+          <div class="form-group">
+            <!-- [class.text-danger]="hasError(field.name)" -->
+            <!-- (ionBlur)="setLabelColor(i)" -->
+            <label>{{ field.label }}</label>
+            <ion-input
+              class="form-control"
+              [type]="field.type"
+              [formControlName]="field.name"
+            ></ion-input>
+          </div>
+          <ion-control-error
+            [control]="form.get(field.name)"
+            [label]="field.label"
+          ></ion-control-error>
         </ng-container>
 
         <ion-row>
@@ -21,7 +29,6 @@
             </ion-button>
           </ion-col>
         </ion-row>
-
       </form>
     </div>
   </div>

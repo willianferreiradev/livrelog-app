@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Permission } from '../shared/models/Permission';
 
 @Component({
   selector: 'app-tabs',
@@ -6,7 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['tabs.page.scss']
 })
 export class TabsPage {
+  permissions: Permission[] = [];
 
-  constructor() {}
+  constructor() {
+    this.permissions = [
+      { route: 'home', icon: 'home', label: 'Home' },
+      { route: 'changes', icon: 'arrow-redo', label: 'Mudanças' },
+      { route: 'notifications', icon: 'notifications', label: 'Notificações' },
+      { route: 'profile', icon: 'person-circle', label: 'Meu Perfil' },
+    ];
+  }
 
 }

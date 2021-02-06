@@ -22,7 +22,7 @@ export class LoginGuard implements CanActivate {
       map(user => JSON.parse(user)),
       map(user => user ? user : { access_token: null }),
       map(({ access_token }) => {
-        if (access_token) this.router.navigate(['client', 'tabs', 'tab1']);
+        if (access_token) this.router.navigate(['client', 'tabs', 'home']);
         return !!!access_token;
       })
     );

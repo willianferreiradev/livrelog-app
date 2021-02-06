@@ -1,0 +1,44 @@
+ion-fab-button.prev {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  z-index: 1;
+}
+
+ion-fab-button.next {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 1;
+}
+
+@media (min-width: 0px) {
+  .images {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 420px) {
+  .images {
+    column-count: 3;
+  }
+}
+
+@media (min-width: 720px) {
+  .images {
+    column-count: 4;
+  }
+}
+
+.one-image {
+  margin: 2px;
+  position: relative;
+
+  .close {
+    position: absolute;
+    top: 0;
+    right: 2px;
+    z-index: 100;
+    padding: 0;
+  }
+}

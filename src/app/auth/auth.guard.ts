@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, CanActivateChild } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { from, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -11,7 +11,8 @@ import { AuthService } from './auth.service';
 export class AuthGuard implements CanActivate, CanActivateChild {
   constructor(
     private storage: Storage,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) { }
 
   canActivate(
@@ -31,6 +32,11 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   private hasAccessTokenObservable(): Observable<boolean> {
     return from(this.storage.get('currentUser')).pipe(
       map(user => JSON.parse(user)),
+      tap(user => {
+        if (user) {
+          this.auth.currentUserSubject.next(user);
+        }
+      }),
       map(user => user ? user : { access_token: null }),
       map(({ access_token }) => {
         if (!access_token) this.router.navigate(['auth', 'login']);

@@ -10,6 +10,7 @@ import { FormValidations } from '../../helpers/FormValidation';
 export class ControlErrorComponent {
   @Input() control: FormControl;
   @Input() label: string;
+  @Input() submited = true;
 
   get errorMessage(): string {
     for (const propertyName in this.control.errors) {

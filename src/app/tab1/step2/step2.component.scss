@@ -1,0 +1,23 @@
+ion-fab-button.prev {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  z-index: 1;
+}
+
+ion-fab-button.next {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 1;
+}
+
+
+ ion-item {
+  // --border-color: var(--ion-color-medium-shade);
+  --border-radius: 3px;
+  --border-width: 1px;
+  --box-shadow: 2px gray;
+  // --highlight-height: 0;
+  // --background: #f8f9fa;
+ }

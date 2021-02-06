@@ -1,0 +1,75 @@
+<form [formGroup]="form">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Endereço de Retirada</ion-card-title>
+    </ion-card-header>
+    <ion-card-content formGroupName="origin">
+      <ng-container *ngFor="let field of fields; let i = index">
+        <div class="form-group">
+          <label [class.text-danger]="hasError('origin.' + field.name)">{{
+            field.label
+          }}</label>
+          <input
+            [class.is-invalid]="hasError('origin.' + field.name)"
+            class="form-control"
+            [type]="field.type"
+            [formControlName]="field.name"
+            [mask]="field.mask"
+          />
+          <ion-control-error
+            [control]="form.get('origin.' + field.name)"
+            [label]="field.label"
+            [submited]="submited"
+          ></ion-control-error>
+        </div>
+      </ng-container>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card style="margin-bottom: 70px">
+    <ion-card-header>
+      <ion-card-title>Endereço de Entrega</ion-card-title>
+    </ion-card-header>
+    <ion-card-content formGroupName="destination">
+      <ng-container *ngFor="let field of fields; let i = index">
+        <div class="form-group">
+          <label [class.text-danger]="hasError('destination.' + field.name)">{{
+            field.label
+          }}</label>
+          <input
+            [class.is-invalid]="hasError('destination.' + field.name)"
+            class="form-control"
+            [type]="field.type"
+            [formControlName]="field.name"
+            [mask]="field.mask"
+          />
+          <ion-control-error
+            [control]="form.get('destination.' + field.name)"
+            [label]="field.label"
+            [submited]="submited"
+          ></ion-control-error>
+        </div>
+      </ng-container>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab-button
+    type="button"
+    color="primary"
+    style="justify-content: flex-start"
+    (click)="prev()"
+    class="prev"
+  >
+    <ion-icon name="chevron-back"></ion-icon>
+  </ion-fab-button>
+
+  <ion-fab-button
+    type="button"
+    color="primary"
+    style="justify-content: flex-end"
+    (click)="onSubmit()"
+    class="next"
+  >
+    <ion-icon name="chevron-forward"></ion-icon>
+  </ion-fab-button>
+</form>

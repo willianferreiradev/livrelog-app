@@ -1,19 +1,15 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Home
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <ion-button (click)="click()">clçq</ion-button>
+  <ion-fab-button class="add-button" (click)="click()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
 </ion-content>

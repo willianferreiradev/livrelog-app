@@ -30,7 +30,7 @@ export class LoginPage extends BaseForm implements OnInit {
 
   submit(): void {
     this.service.login(this.formValue).subscribe(() => {
-      this.router.navigate(['client', 'tabs', 'tab1']);
+      this.router.navigate(['client', 'tabs', 'home']);
     });
   }
 

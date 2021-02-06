@@ -17,7 +17,7 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private storage: Storage
-  ) { 
+  ) {
     this.storage.get('currentUser').then(user => this.currentUserSubject.next(JSON.parse(user)));
   }
 
@@ -31,4 +31,5 @@ export class AuthService {
         })
       );
   }
+
 }

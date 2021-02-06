@@ -1,0 +1,28 @@
+<input class="form-control" type="file" (change)="upload($event)" />
+
+<div class="images">
+  <div class="one-image" *ngFor="let image of showImages">
+    <span class="close">&times;</span>
+    <img [src]="image" />
+  </div>
+</div>
+
+<ion-fab-button
+  type="button"
+  color="primary"
+  style="justify-content: flex-start"
+  (click)="prev()"
+  class="prev"
+>
+  <ion-icon name="chevron-back"></ion-icon>
+</ion-fab-button>
+
+<ion-fab-button
+  type="button"
+  color="primary"
+  style="justify-content: flex-end"
+  (click)="onSubmit()"
+  class="next"
+>
+  <ion-icon name="save"></ion-icon>
+</ion-fab-button>

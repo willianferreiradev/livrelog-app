@@ -6,6 +6,7 @@ export abstract class BaseForm {
   form: FormGroup;
   colorFields = {};
   fields: Field[] = [];
+  submited = false;
 
   constructor() { }
 
@@ -18,6 +19,7 @@ export abstract class BaseForm {
   }
 
   onSubmit(): void {
+    this.submited = true;
     if (this.form.valid) {
       this.submit();
     } else {
@@ -45,6 +47,14 @@ export abstract class BaseForm {
     return (
       !this.form.get(field).valid &&
       (this.form.get(field).touched || this.form.get(field).dirty)
+    );
+  }
+
+  hasError(field: string): boolean {
+    return (
+      !this.form.get(field).valid &&
+      (this.form.get(field).touched || this.form.get(field).dirty) &&
+      this.submited
     );
   }
 

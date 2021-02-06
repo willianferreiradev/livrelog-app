@@ -11,6 +11,8 @@ import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
 import { IonicStorageModule } from '@ionic/storage';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +25,9 @@ import { IonicStorageModule } from '@ionic/storage';
     IonicStorageModule.forRoot({
       name: '__livrelog',
       driverOrder: ['indexeddb', 'sqlite', 'websql']
-    })
+    }),
+    NgbModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [
     StatusBar,

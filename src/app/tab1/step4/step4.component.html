@@ -1,0 +1,54 @@
+<form [formGroup]="form">
+  <ion-card style="margin-bottom: 70px">
+    <ion-card-header>
+      <ion-card-title>Inventário da Mudança</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="form-group">
+        <label [class.text-danger]="hasError('inventory')">Inventário</label>
+        <textarea
+          class="form-control"
+          [class.is-invalid]="hasError('inventory')"
+          placeholder="Digite aqui os itens da mudança, separando por virgula. Ex: Sófa, cama, geladeira..."
+          rows="10"
+          formControlName="inventory"
+        ></textarea>
+        <ion-control-error
+          [control]="form.get('inventory')"
+          label="Tipo de Imóvel"
+          [submited]="submited"
+        ></ion-control-error>
+      </div>
+      <div class="form-group">
+        <label>Observações</label>
+        <textarea
+          class="form-control"
+          placeholder="Digite aqui alguma observação referente a mudança"
+          rows="10"
+          formControlName="comments"
+        ></textarea>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <ion-fab-button
+    type="button"
+    color="primary"
+    style="justify-content: flex-start"
+    (click)="prev()"
+    class="prev"
+  >
+    <ion-icon name="chevron-back"></ion-icon>
+  </ion-fab-button>
+
+  <ion-fab-button
+    type="button"
+    color="primary"
+    style="justify-content: flex-end"
+    (click)="onSubmit()"
+    class="next"
+  >
+    <ion-icon name="chevron-forward"></ion-icon>
+  </ion-fab-button>
+</form>
+
+{{ formValue | json }}

@@ -1,11 +1,19 @@
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
+import { CreateBudgetComponent } from './create-budget/create-budget.component';
+import { Step1Component } from './step1/step1.component';
+import { Step2Component } from './step2/step2.component';
+import { Step3Component } from './step3/step3.component';
+import { Step4Component } from './step4/step4.component';
+import { Step5Component } from './step5/step5.component';
+import { SharedModule } from '../shared/shared.module';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   imports: [
@@ -13,8 +21,20 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab1PageRoutingModule
+    Tab1PageRoutingModule,
+    ReactiveFormsModule,
+    SharedModule,
+    NgxMaskModule
   ],
-  declarations: [Tab1Page]
+  declarations: [
+    Tab1Page,
+    CreateBudgetComponent,
+    Step1Component,
+    Step2Component,
+    Step3Component,
+    Step4Component,
+    Step5Component,
+  ],
+  entryComponents: [CreateBudgetComponent]
 })
 export class Tab1PageModule {}

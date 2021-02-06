@@ -1,0 +1,161 @@
+<form [formGroup]="form">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Características da Retirada</ion-card-title>
+    </ion-card-header>
+    <ion-card-content formGroupName="withdrawal">
+      <div class="form-group">
+        <label [class.text-danger]="hasError('withdrawal.type_building')"
+          >Tipo de Imóvel</label
+        >
+        <ion-select
+          placeholder="Selecione"
+          class="form-control"
+          formControlName="type_building"
+          [class.is-invalid]="hasError('withdrawal.type_building')"
+        >
+          <ion-select-option>Casa Terrea</ion-select-option>
+          <ion-select-option>Casa Assobradada</ion-select-option>
+          <ion-select-option>Sobrado</ion-select-option>
+          <ion-select-option>Apartamento</ion-select-option>
+          <ion-select-option>Apartamento (duplex)</ion-select-option>
+          <ion-select-option>Apartamento (triplex)</ion-select-option>
+        </ion-select>
+        <ion-control-error
+          [control]="form.get('withdrawal.type_building')"
+          label="Tipo de Imóvel"
+          [submited]="submited"
+        ></ion-control-error>
+      </div>
+
+      <div class="form-group">
+        <label [class.text-danger]="hasError('withdrawal.number_bedroom')"
+          >Quantidade de dormitórios</label
+        >
+        <ion-select
+          placeholder="Selecione"
+          class="form-control"
+          formControlName="number_bedroom"
+          [class.is-invalid]="hasError('withdrawal.number_bedroom')"
+        >
+          <ion-select-option *ngFor="let number of numberBedrooms">{{
+            number
+          }}</ion-select-option>
+        </ion-select>
+        <ion-control-error
+          [control]="form.get('withdrawal.number_bedroom')"
+          label="Quantidade de dormitórios"
+          [submited]="submited"
+        ></ion-control-error>
+      </div>
+
+      <ion-list>
+        <ion-item *ngFor="let field of customFields">
+          <ng-container [ngSwitch]="field.name">
+            <ion-label *ngSwitchCase="'disassemble_furniture'"
+              >Desmontar {{ field.label }}</ion-label
+            >
+            <ion-label *ngSwitchCase="'pack_furniture'"
+              >Embalar {{ field.label }}</ion-label
+            >
+            <ion-label *ngSwitchDefault>{{ field.label }}</ion-label>
+          </ng-container>
+          <ion-checkbox
+            slot="end"
+            [formControlName]="field.name"
+          ></ion-checkbox>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card style="margin-bottom: 70px">
+    <ion-card-header>
+      <ion-card-title>Características da Entrega</ion-card-title>
+    </ion-card-header>
+    <ion-card-content formGroupName="delivery">
+      <div class="form-group">
+        <label [class.text-danger]="hasError('delivery.type_building')"
+          >Tipo de Imóvel</label
+        >
+        <ion-select
+          placeholder="Selecione"
+          class="form-control"
+          formControlName="type_building"
+          [class.is-invalid]="hasError('delivery.type_building')"
+        >
+          <ion-select-option>Casa Terrea</ion-select-option>
+          <ion-select-option>Casa Assobradada</ion-select-option>
+          <ion-select-option>Sobrado</ion-select-option>
+          <ion-select-option>Apartamento</ion-select-option>
+          <ion-select-option>Apartamento (duplex)</ion-select-option>
+          <ion-select-option>Apartamento (triplex)</ion-select-option>
+        </ion-select>
+        <ion-control-error
+          [control]="form.get('delivery.type_building')"
+          label="Tipo de Imóvel"
+          [submited]="submited"
+        ></ion-control-error>
+      </div>
+
+      <div class="form-group">
+        <label [class.text-danger]="hasError('delivery.number_bedroom')"
+          >Quantidade de dormitórios</label
+        >
+        <ion-select
+          placeholder="Selecione"
+          class="form-control"
+          formControlName="number_bedroom"
+          [class.is-invalid]="hasError('delivery.number_bedroom')"
+        >
+          <ion-select-option *ngFor="let number of numberBedrooms">{{
+            number
+          }}</ion-select-option>
+        </ion-select>
+        <ion-control-error
+          [control]="form.get('delivery.number_bedroom')"
+          label="Quantidade de dormitórios"
+          [submited]="submited"
+        ></ion-control-error>
+      </div>
+
+      <ion-list>
+        <ion-item *ngFor="let field of customFields">
+          <ng-container [ngSwitch]="field.name">
+            <ion-label *ngSwitchCase="'disassemble_furniture'"
+              >Montar {{ field.label }}</ion-label
+            >
+            <ion-label *ngSwitchCase="'pack_furniture'"
+              >Desembalar {{ field.label }}</ion-label
+            >
+            <ion-label *ngSwitchDefault>{{ field.label }}</ion-label>
+          </ng-container>
+          <ion-checkbox
+            slot="end"
+            [formControlName]="field.name"
+          ></ion-checkbox>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab-button
+    type="button"
+    color="primary"
+    style="justify-content: flex-start"
+    (click)="prev()"
+    class="prev"
+  >
+    <ion-icon name="chevron-back"></ion-icon>
+  </ion-fab-button>
+
+  <ion-fab-button
+    type="button"
+    color="primary"
+    style="justify-content: flex-end"
+    (click)="onSubmit()"
+    class="next"
+  >
+    <ion-icon name="chevron-forward"></ion-icon>
+  </ion-fab-button>
+</form>
