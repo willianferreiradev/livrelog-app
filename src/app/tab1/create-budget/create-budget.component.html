@@ -8,34 +8,21 @@
 </ion-header>
 
 <ion-content>
-  <!-- <div class="content">
-    <div class="progress mt-2" style="width: 95%">
-      <div class="progress-bar" [ngStyle]="{ width: percent }">
-        {{ percent }}
-      </div>
-    </div>
-  </div> -->
-  <!-- {{ steps | json }} -->
-  <div class="content">
-    <div class="stepwizard">
-      <div class="stepwizard-row setup-panel">
-        <div class="stepwizard-step" *ngFor="let step of steps">
-          <button
-            type="button"
-            class="btn btn-circle"
-            [ngClass]="
-              step == actualStep ? 'btn-primary' : 'btn-secondary disabled'
-            "
-          >
-            {{ step }}
-          </button>
-          <!-- <p>Step {{ step }}</p> -->
-        </div>
+  <div class="step-wizard">
+    <div class="step-wizard-row">
+      <div class="step-wizard-step" *ngFor="let step of steps">
+        <button
+          type="button"
+          class="btn btn-circle"
+          [ngClass]="actualStepClasses(step)"
+        >
+          {{ step }}
+        </button>
       </div>
     </div>
   </div>
 
-  <ng-container [ngSwitch]="actualStep">
+  <ng-container [ngSwitch]="actualStep" *ngIf="!loading">
     <app-step1
       [budget]="budget"
       (nextStep)="nextStep($event)"
@@ -55,18 +42,19 @@
       (nextStep)="nextStep($event)"
       *ngSwitchCase="3"
     ></app-step3>
+
     <app-step4
       [budget]="budget"
       (prevStep)="prevStep($event)"
       (nextStep)="nextStep($event)"
       *ngSwitchCase="4"
     ></app-step4>
+
     <app-step5
       (prevStep)="prevStep()"
       (nextStep)="nextStep($event)"
       *ngSwitchCase="5"
     ></app-step5>
   </ng-container>
-
-  {{ budget | json }}
+  <pre>{{ budget | json }}</pre>
 </ion-content>

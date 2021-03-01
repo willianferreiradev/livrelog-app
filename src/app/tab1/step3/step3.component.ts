@@ -59,6 +59,7 @@ export class Step3Component extends BaseForm implements OnInit {
 
   private getCharacteristicForm(type: string): FormGroup {
     return this.formBuilder.group({
+      id: [null],
       type_building: [null, Validators.required],
       number_bedroom: [null, Validators.required],
       has_elevator: [false],

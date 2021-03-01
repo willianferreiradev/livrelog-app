@@ -59,6 +59,7 @@ export class Step2Component extends BaseForm implements OnInit {
   private getAddressForm(): FormGroup {
     const value = { value: null, disabled: true };
     return this.formBuilder.group({
+      id: [null],
       cep: [null, Validators.required],
       street: [null],
       complement: [null],

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Storage } from '@ionic/storage';
+
 import { CreateBudgetComponent } from './create-budget/create-budget.component';
 
 @Component({
@@ -12,7 +12,7 @@ export class Tab1Page {
 
   constructor(
     private modalController: ModalController
-  ) {}
+  ) { }
 
   async click() {
     const modal = await this.modalController.create({

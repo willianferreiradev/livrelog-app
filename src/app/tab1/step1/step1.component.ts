@@ -21,7 +21,7 @@ export class Step1Component extends BaseForm implements OnInit {
   ngOnInit() {
     this.createForm();
     if (this.budget?.date) {
-      const date = (new Date(this.budget.date)).toISOString();
+      const date = (new Date(`${this.budget.date}T10:00:00`)).toISOString();
       this.form.patchValue({ date });
     }
   }

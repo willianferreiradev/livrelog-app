@@ -6,6 +6,7 @@ import { from, Observable, of, throwError } from 'rxjs';
 // import { LoaderService } from '@services/loader.service';
 import { catchError, finalize, map, switchMap, tap } from 'rxjs/operators';
 import { AlertController, LoadingController } from '@ionic/angular';
+import { defaultAlertConfig } from '../helpers/alert.helper';
 // import { showToastError } from '@shared/helpers/toastr';
 
 @Injectable()
@@ -17,7 +18,6 @@ export class JwtInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const loadingConfig = { message: 'Carregando...' };
-    const { method } = request;
 
     return from(this.loadingController.create(loadingConfig)).pipe(
       tap(loading => loading.present()),
@@ -49,10 +49,8 @@ export class JwtInterceptor implements HttpInterceptor {
     }).join('<br> ');
   }
 
-  private showAlert(message: string) {
-    this.alertController.create({
-      message,
-      buttons: ['OK']
-    }).then(alert => alert.present());
+  private async showAlert(message: string) {
+    const alert = await this.alertController.create(defaultAlertConfig(message));
+    alert.present();
   }
 }
